@@ -38,8 +38,8 @@ type Client struct {
 	rdrc             RDRCStore
 	initRDRCFunc     func() RDRCStore
 	logger           logger.ContextLogger
-	cache            freelru.Cache[dns.Question, *dns.Msg]
-	transportCache   freelru.Cache[transportCacheKey, *dns.Msg]
+	cache            *freelru.Cache[dns.Question, *dns.Msg]
+	transportCache   *freelru.Cache[transportCacheKey, *dns.Msg]
 }
 
 type RDRCStore interface {
