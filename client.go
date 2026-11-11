@@ -81,9 +81,9 @@ func NewClient(options ClientOptions) *Client {
 	}
 	if !client.disableCache {
 		if !client.independentCache {
-			client.cache = common.Must1(freelru.NewSharded[dns.Question, *dns.Msg](cacheCapacity, maphash.NewHasher[dns.Question]().Hash32))
+			client.cache = common.Must1(freelru.New[dns.Question, *dns.Msg](cacheCapacity, maphash.NewHasher[dns.Question]().Hash32, true))
 		} else {
-			client.transportCache = common.Must1(freelru.NewSharded[transportCacheKey, *dns.Msg](cacheCapacity, maphash.NewHasher[transportCacheKey]().Hash32))
+			client.transportCache = common.Must1(freelru.New[transportCacheKey, *dns.Msg](cacheCapacity, maphash.NewHasher[transportCacheKey]().Hash32, true))
 		}
 	}
 	return client
